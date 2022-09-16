@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# is a factors challenge
 
 check_factor()
 {
@@ -32,6 +31,7 @@ check_factor()
 
         echo "$num$num1*$num2"
 }
+
 if [ $# -ne 1  ]
 then
         echo 'Usage: factors <file>'
