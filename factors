@@ -1,27 +1,48 @@
-#!/usr/bin/python3
-from sys import argv
+#!/usr/bin/env bash
+# is a factors challenge
 
-def factorize(x):
-    """prints out a simple decomposition of an integer >1"""
-    a = 2    
+check_factor()
+{
+	if [ $# -ne 3 ];
+        then
+                args=("$@")
+                count=0
+                num2=1
+                for a in ${args[*]};
+                do
+                        if [ $count -gt 1 ];
+                        then
+                                num2=$(echo $a*$num2 | bc)
+                        fi
+                        count=$((count + 1))
+                done
+        else
+                num2=$3
+        fi
 
-    if x < 2:
-        return
+        num1=$2
+        num=$(echo "$1" | tr ':' '=')
 
-    while x % a:
-        a += 1
-    print("{:.0f}={:.0f}*{:.0f}".format(x, x / a, a))
+        result=$(echo "if($num2 > $num1) 1 else 0" | bc)
+	        if ((result == 1)); then
+		        numcp=$num1
+		        num1=$num2
+		        num2=$numcp
+                fi
 
-if len(argv) != 2:
-    exit()
+        echo "$num$num1*$num2"
+}
+if [ $# -ne 1  ]
+then
+        echo 'Usage: factors <file>'
+        exit 1
+else
 
-try:
-    with open(argv[1]) as file:
-        line = file.readline()
+        while read i
+        do
 
-        while line != "":
-            x = int(line.split('\n')[0])
-            factorize(x)
-            line = file.readline()
-except:
-    pass
+                result=$(factor "$i")
+                check_factor $result
+
+        done < "$1"
+fi
