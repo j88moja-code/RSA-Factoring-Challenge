@@ -1,31 +1,32 @@
 #!/usr/bin/python3
 
-from math import gcd
-from sys import argv
+import sys
 
-def pollards_rho(x):
-    i = 2
-    j = 2
-    n = 1
-    f = lambda i: (i**2 + 1) % x
-    while n == 1:
-        i = f(i)
-        j = f(f(j))
-        n = gcd(abs(i - j), x)
-    if n != x:
-        return n
 
-def read_file():
-    with open(argv[1]) as f:
-        for r in f:
-            number = int(r)
-            if number % 2 == 0:
-                print("{:d}={}*{}".format(number, number // 2, 2))
-            else:
-                p = pollards_rho(number)
-                f1 = p
-                f2 = int(number / p)
-                print("{}={}*{}".format(number, f1, f2))
+# fn unpack number factorial
+def fc():
+    """
+    function fc to search file to convert number and format n=p*q
+    """
+    try:
+        revfile = sys.argv[1]
+        with open(revfile) as f:
+            for revnumber in f:
+                revnumber = int(revnumber)
+                if revnumber % 2 == 0:
+                        print("{}={}*{}".format(revnumber, revnumber // 2, 2))
+                        continue
+                i = 3
+                while i < revnumber // 2:
+                    if revnumber % i == 0:
+                        print("{}={}*{}".format(revnumber, revnumber // i, i))
+                        break
+                    i = i + 2
+                if i == (revnumber // 2) + 1:
+                    print("{}={}*{}".format(revnumber, revnumber, 1))
+    except (IndexError):
+        pass
 
-if __name__ == "__main__":
-    read_file()
+
+# autostart
+fc()
