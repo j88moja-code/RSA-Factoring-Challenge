@@ -10,6 +10,6 @@ The smallest of them, a 100-decimal digit number called RSA-100 was factored by 
 
 ## Contents
 
-* [factors]() - Factorizes many numbers as possible into a product of two smaller numbers.
-* [rsa]() - RSA Laboratories states that: for each RSA number `n`, there exist prime numbers `p` and `q` such that
+* [factors](https://github.com/j88moja-code/RSA-Factoring-Challenge/blob/main/factors) - Factorizes many numbers as possible into a product of two smaller numbers.
+* [rsa](https://github.com/j88moja-code/RSA-Factoring-Challenge/blob/main/rsa) - RSA Laboratories states that: for each RSA number `n`, there exist prime numbers `p` and `q` such that
             `n` = `p` × `q`. The problem is to find these two primes, given only `n`.
